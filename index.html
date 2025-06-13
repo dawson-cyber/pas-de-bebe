@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculatrice de Règles - Ghalia 🌸</title>
+  <style>
+    body {
+      font-family: 'Georgia', serif;
+      background-color: #636167;
+      color: #8d0492;
+      text-align: center;
+      padding: 30px;
+    }
+
+    h1 {
+      color: #339dd6;
+    }
+
+    input, button {
+      padding: 10px;
+      font-size: 1em;
+      margin: 10px;
+      border-radius: 8px;
+      border: 1px solid #336cd6;
+    }
+
+    button {
+      background-color: #ff69b4;
+      color: white;
+      cursor: pointer;
+    }
+
+    .resultat {
+      margin-top: 20px;
+      font-size: 1.2em;
+      background: #e63691;
+      padding: 15px;
+      border-radius: 10px;
+      display: inline-block;
+    }
+    @media screen and (min-width: 768px) {
+      h1 {
+        font-size: 2em;
+      }
+
+      .conteneur {
+        padding: 35px;
+      }
+    }
+
+    @media screen and (max-width: 400px) {
+      h1 {
+        font-size: 1.7em;
+      }
+
+      .conteneur {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>🌸 Calculatrice de règles - Pour Ghalia 💖</h1>
+
+  <label for="dateRegles">Date des dernières règles :</label><br>
+  <input type="date" id="dateRegles"><br>
+
+  <label for="cycle">Durée moyenne du cycle (jours) :</label><br>
+  <input type="number" id="cycle" value="28"><br>
+
+  <button onclick="calculer()">Calculer</button>
+
+  <div class="resultat" id="resultat"></div>
+
+  <script>
+    function calculer() {
+      const dateInput = document.getElementById("dateRegles").value;
+      const dureeCycle = parseInt(document.getElementById("cycle").value);
+      if (!dateInput || isNaN(dureeCycle)) {
+        document.getElementById("resultat").innerText = "Veuillez remplir tous les champs.";
+        return;
+      }
+
+      const dateRegles = new Date(dateInput);
+      const prochaineRegle = new Date(dateRegles);
+      prochaineRegle.setDate(prochaineRegle.getDate() + dureeCycle);
+
+      const dateFormat = (d) => d.toLocaleDateString("fr-FR");
+
+      document.getElementById("resultat").innerHTML =
+        `📅 Prochaines règles estimées : <strong>${dateFormat(prochaineRegle)}</strong>`;
+    }
+  </script>
+</body>
+</html>
